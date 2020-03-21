@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=locals.title%></title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <link rel="stylesheet" href="/CSS/home.css">   
+</head>
+<body>
+    <div id="heading">
+        <i class="far fa-list-alt"></i>
+        <h1>TODO APP</h1>
+    </div>
+    <div id="to-do-container">
+        <form >
+            <div class="row">
+                <div class="col">
+                    <fieldset>
+                        <label >DESCRIPTION</label>
+                        <input type="text" class="display" name="description" placeholder="what do you need to do?" required>
+                      </fieldset>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <fieldset >
+                        <label>CATEGORY</label>
+                        <select class="display" name="category" placeholder="Choose a category" required> 
+                            <!--for required to work in select first value should be ""-->
+                            <option value="" selected disabled hidden> 
+                                Select a Category 
+                            </option> 
+                            <option value="Personal">Personal</option>
+                            <option value="Work">Work</option>
+                            <option value="School">School</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Others">Others</option>
+                         </select>
+                    </fieldset>
+                </div>
+                <div class="col-6">
+                    <fieldset >
+                        <label >DATE</label>
+                        <input type="date" class="display" name="date" required>
+                    </fieldset>
+                </div>
+            </div>    
+            <div class="row">
+                <div class="col button-row">
+                    
+                        <button id="add-button" formaction="/add" formmethod="POST"> <!-- name of routes file should be add -->
+                            <i class="fas fa-plus"></i>  ADD TASK
+                        </button>
+                   
+                        <button id="del-button" formmethod="GET" formaction="/deletetask" formnovalidate><!--name of routes file shouldbe deletetask-->
+                            <i class="far fa-trash-alt"></i>DELETE TASK
+                        </button>
+                    
+                </div>
+            </div>
+            
+            
+                <ul>
+                    <% for(let i of to_do)
+                        {%>
+                            <li>
+                                <div class="row">
+                                    <div class="col-1">
+                                        <input type="checkbox" value="<%=i.id%>" class="checkbox" required>
+                                    </div>
+                                    <div class="col-9">
+                                        <p class="desc"><%=i.description%></p>
+                                        <p class="date">
+                                            <i class="far fa-calendar-alt"></i>
+                                            <%=i.date.toISOString().split('T')[0] %>
+                                        </p>
+                                    </div>
+                                    <div class="col-2">
+                                        <div id="todo-category">
+                                            <%=i.category%>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </li>
+                         <%}%>   
+                </ul>
+           
+          
+            </form>         
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  <script src="/javascript/home.js"></script> 
+</body>
+</html>
