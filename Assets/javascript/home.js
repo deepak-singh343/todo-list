@@ -14,12 +14,5 @@ deletetask.addEventListener("click", function(e){
             count++;
         }
     }
-    if(count==0)
-    {
-        alert("Plese check the list which you want to delete");
-    }
-    else{
-        deletetask.setAttribute("formaction", `/deletetask/${deleteEle}`);
-    }
-    
+    deletetask.setAttribute("formaction", `/deletetask/${deleteEle}`);
 });
